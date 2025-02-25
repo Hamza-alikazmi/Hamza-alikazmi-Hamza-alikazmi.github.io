@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en-US" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Skill Spectrum PK - Free Online Courses</title>
+    <meta name="description" content="Skill Spectrum PK offers free courses in a wide range of subjects. Download or watch courses for free and boost your skills." />
+    
+    <link rel="icon" href="https://skillspectrumpk.vercel.app/logo.jpg" sizes="32x32" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" defer></script>
+    <script src="script.js" defer></script>
+
+    <style>/* Basic Styling for the Page */
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #CDC1FF;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden; /* Prevent horizontal scroll */
+        }
+        
+        #darkModeToggle {
+            position: absolute;
+            right: 8%; /* Position button on the right */
+            top: 20px; /* Adjust vertical position */
+            background-color: transparent; /* Ensure button background is transparent */
+            border: none; /* Remove button border */
+            cursor: pointer; /* Show pointer on hover */
+        }
+        
+        /* General header styling */
+        .header {
+            z-index: 1; /* Ensure content appears above the canvas */
+            background-color: transparent;
+            display: flex; /* Use flexbox for header layout */
+            justify-content: space-between; /* Space out elements */
+            /* align-items: center; Center items vertically */
+        }
+        
+        /* Flexbox for header content */
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            position: relative;
+        }
+        
+        /* Logo styling */
+        .logo {
+            position: absolute;
+            border-radius: 50%;
+            padding-left: 2%;
+            padding-top: 1%;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            background-color: transparent;
+        }
+        
+        /* Moto text styling */
+        .header-text {
+            font-size: 1.5em;
+            font-style: italic;
+            margin-left: 1rem;
+            color: aqua;
+            display: flex;
+        }
+        
+        /* SVG Icon Styles */
+        svg {
+            width: 24px; /* Adjust size as needed */
+            height: 24px; /* Adjust size as needed */
+            color: black;
+            transition: all 0.3s; /* Smooth hover effect */
+        }
+        
+        svg:hover {
+            border-radius: 35%;
+            border: 2px solid #2588eb; /* Optional border on hover */
+        }
+        
+        /* Canvas Styling */
+        #bouncingBallsCanvas {
+            position: absolute; 
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1; /* Ensure canvas is behind the content */
+            pointer-events: none; /* Allow clicks to pass through */
+        }
+        
+        /*####################################################### Navigation Bar Styles ####################################################*/
+        .nav-main {
+            background-color: #343a40;
+            padding: 1rem 0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            position: relative;
+            width: 100%;
+            overflow: hidden; /* Prevent content from overflowing */
+        }
+        
+        .nav-main ul {
+            list-style-type: none;
+            display: flex;
+            flex-wrap: wrap; /* Allow content to wrap on smaller screens */
+            justify-content: center;
+            margin: 0;
+            padding: 0;
+            width: 100%;
+        }
+        
+        .nav-main ul li {
+            margin: 0 10px; /* Reduced margin for better fit */
+        }
+        
+        .nav-main ul li a {
+            text-decoration: none;
+            color: #ffffff;
+            font-size: 1rem;
+            padding: 8px 10px; /* Reduced padding to fit more content */
+            display: block;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            border-radius: 4px;
+            font-weight: 500;
+            white-space: nowrap; /* Prevent text from wrapping */
+        }
+        
+        .nav-main ul li a:hover {
+            background-color: #495057;
+            color: #f8f9fa;
+        }
+        
+        .nav-main ul li.active a {
+            background-color: #17a2b8;
+            color: #ffffff;
+        }
+        
+        /*############################################################### Hamburger Menu Icon ###################################################*/
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+        
+        .hamburger div {
+            width: 25px;
+            height: 3px;
+            background-color: #ffffff;
+            margin: 4px 0;
+            transition: all 0.3s ease;
+        }
+        
+        /* Mobile Navigation */
+        .nav-main.mobile ul {
+            flex-direction: column;
+            align-items: center;
+            display: none; /* Initially hidden */
+        }
+        
+        .nav-main.mobile ul li {
+            margin: 10px 0;
+        }
+        
+        .nav-main.mobile ul.show {
+            display: flex; /* Show when toggled */
+        }
+        
+        /* Shadow effect on the whole page content */
+        .page-content {
+            padding: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+            background-color: #31b2ee;
+            margin: 20px auto;
+            max-width: 1200px;
+            border-radius: 8px;
+        }
+        
+        /*################################################# Page Content###########################$*/
+        /* Styles for the search input and buttons */
+        input[type="text"] {
+            padding: 10px 15px; /* Padding for the input */
+            border: 2px solid #7a6bff; /* Border color */
+            border-radius: 5px; /* Rounded corners */
+            width: 250px; /* Fixed width */
+            font-size: 16px; /* Font size */
+            transition: border-color 0.3s ease; /* Smooth border color transition */
+        }
+        
+        input[type="text"]:focus {
+            outline: none; /* Remove default outline */
+            border-color: #2588eb; /* Change border color on focus */
+        }
+        
+        /* Styles for the buttons */
+        button {
+            padding: 10px 15px; /* Padding for buttons */
+            border: none; /* Remove default border */
+            border-radius: 5px; /* Rounded corners */
+            background-color: #7a6bff; /* Background color */
+            color: white; /* Text color */
+            font-size: 16px; /* Font size */
+            cursor: pointer; /* Show pointer on hover */
+            margin-left: 10px; /* Space between buttons */
+            transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth hover effects */
+        }
+        
+        button:hover {
+            background-color: #5f52d8; /* Darker background on hover */
+            transform: translateY(-2px); /* Slight lift effect */
+        }
+        
+        button:active {
+            transform: translateY(1px); /* Slight depress effect when clicked */
+        }
+        
+        /* Styles for the content section */
+        .search-box {
+            margin-top: 20px; /* Space above the content */
+            padding: 20px; /* Padding around the content */
+            background-color: #f0f0f0; /* Light background color */
+            border-radius: 8px; /* Rounded corners */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+        }
+        
+        /* Styles for the search results */
+        #searchResults {
+            margin-top: 10px; /* Space above search results */
+            padding: 10px; /* Padding for search results */
+            background-color: white; /* White background for results */
+            border-radius: 5px; /* Rounded corners */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for results */
+        }
+        
+        /* Heading for search results */
+        h2 {
+            font-size: 1.5em; /* Font size */
+            color: #333; /* Dark color for heading */
+            margin-bottom: 10px; /* Space below heading */
+        }
+        
+        
+        
+        /*Main Content */
+        .clear-block {
+            clear: both;
+          }
+          
+          #primary-content {
+            padding: 20px;
+            max-width: 1200px; /* Wider max-width for more boxes */
+            margin: 0 auto;
+          }
+          
+          .posts {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Responsive grid */
+            gap: 20px; /* Space between posts */
+            height: 500px;
+          }
+          
+          .post-details {
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            padding: 15px;
+            transition: transform 0.3s, box-shadow 0.3s;
+          }
+          
+          .post-details:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+          }
+          
+          .post-thumb img {
+            border-radius: 8px;
+            width: 100%;
+            height: auto; /* Maintain aspect ratio */
+            max-height: 160px; /* Limit image height */
+            border-color: #007bff;
+          }
+          
+          .title {
+            font-size: 16px; /* Slightly smaller font size */
+            margin: 10px 0;
+            color: #333;
+          }
+          
+          .title a {
+            text-decoration: none;
+            color: #007bff;
+            transition: color 0.3s;
+          }
+          
+          .title :hover {
+            color: #0056b3;
+          }
+        
+          .post-content {
+            font-size: 14px;
+            color: #555;
+            margin-top: 10px;
+          }
+        
+          .post-content a:hover {
+            text-decoration: underline;
+          }
+        
+        
+        
+        
+        /*########################################################### Responsive Styles################################# */
+        @media (max-width: 768px) {
+            .nav-main ul {
+                display: none;
+                flex-direction: column;
+                width: 100%; /* Ensure full width on smaller screens */
+                padding: 0;
+            }
+        
+            .nav-main ul.show {
+                display: flex;
+            }
+        
+            .hamburger {
+                display: flex;
+            }
+        
+            .nav-main ul li {
+                margin: 5px 0;
+            }
+        
+            .nav-main ul li a {
+                padding: 10px 15px; /* Adjust padding for mobile */
+                text-align: center;
+                width: 100%; /* Ensure full width of the menu item */
+            }
+        }
+        
+        /*########################################################### Dark Mode Styles ################################################*/
+        body.dark-mode {
+            background-color: #121212; 
+            color: #f8f9fa; 
+        }
+        
+        body.dark-mode #header {
+            z-index: 1;
+            background-color: transparent;
+        }
+        
+        body.dark-mode svg{
+            color: white;
+        }
+        
+        body.dark-mode .nav-main {
+            background-color: #282c34; 
+        }
+        
+        body.dark-mode .nav-main ul li a {
+            color: #f8f9fa; 
+        }
+        
+        body.dark-mode .nav-main ul li a:hover {
+            background-color: #3a3f47; 
+        }
+        
+        body.dark-mode .nav-main ul li.active a {
+            background-color: #61dafb; 
+            color: #282c34; 
+        }
+        
+        /*####################################################### Mobile Styles for Header ###############################*/
+        @media (max-width: 480px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+        
+            .header-logo {
+                margin-bottom: 10px; /* Add space between logo and text */
+            }
+        }
+        
+        /* Animation for the Hamburger Icon when clicked */
+        .hamburger.toggle div:nth-child(1) {
+            transform: rotate(-45deg) translate(-5px, 6px);
+        }
+        
+        .hamburger.toggle div:nth-child(2) {
+            opacity: 0;
+        }
+        
+        .hamburger.toggle div:nth-child(3) {
+            transform: rotate(45deg) translate(-5px, -6px);
+        }</style>
+</head>
+<body data-rsssl="1" class="home blog no-js no-fx c2right fluid browser-chrome">
+    <script> document.body.className = document.body.className.replace('no-js', ''); </script>
+
+    <div id="page">
+        <div id="page-ext">
+
+            <!-- Header Section -->
+
+              <div id="header" class="clear-block"><div>
+              <button id="darkModeToggle" class="dark-mode-btn w3-button">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"  class="bi bi-circle-half"   viewBox="0 0 16 16">
+              <path d="M8 15A7 7 0 1 0 8 1zm0 1A8 8 0 1 1 8 0a8 8 0 0 1 0 16"/>
+             </svg>
+             </button>
+            </div>
+                <div class="page-content">
+                    <div id="site-title" class="clear-block">
+                                <div style="display: inline; background-color: #d4abff">
+                                         <canvas id="bouncingBallsCanvas"></canvas>
+                                         <div><img id="logo" src='https://skillspectrumpk.vercel.app/logo.jpg' alt='Logo' /></div>
+                                        <center><center> <p id="Moto">"Knowledge is that which benefits, not that which is memorized"<p></center></center>
+                                </div>
+                            <center>
+                                         <p id="writer">Imam Ash Shaafee</p>
+                            </center>
+                       
+                    </div>
+                </div>
+            </div>
+          
+            <!-- Dark Mode Toggle Button -->
+           
+            
+          
+
+
+
+            <!-- Navigation Bar -->
+            <div class="shadow-left page-content">
+                <div class="shadow-right nav nav-main" role="navigation">
+                    <ul id="menu-menu" class="menu slide-down fadeThis clear-block">
+                        <li id="menu-item-8291" class="menu-home active">
+                            <a href="https://unis-green.vercel.app" aria-current="Home">Home<span class="p"></span></a>
+                        </li>
+                        <li id="menu-item-11" class="Python"><a href="#">Python<span class="p"></span></a></li>
+                        <li id="menu-item-12" class="HTML"><a href="#">HTML<span class="p"></span></a></li>
+                        <li id="menu-item-13" class="CSS"><a href="#">CSS<span class="p"></span></a></li>
+                        <li id="menu-item-15" class="JavaScript"><a href="#">JavaScript<span class="p"></span></a></li>
+                        <li id="menu-item-16" class="SQL"><a href="#">SQL<span class="p"></span></a></li>
+                        <li id="menu-item-18" class="Canva"><a href="#">Canva<span class="p"></span></a></li>
+                        <li id="menu-item-19" class="Ethical Hacking"><a href="#">Ethical Hacking<span class="p"></span></a></li>
+                        <li id="menu-item-22" class="PhotoShop"><a href="#">PhotoShop<span class="p"></span></a></li>
+                        <li id="menu-item-8302" class="Illustrator"><a href="#">Illustrator<span class="p"></span></a></li>
+                        <li id="menu-item-24" class="Node.js"><a href="#">Node.js<span class="p"></span></a></li>
+                        <li id="menu-item-28" class="React"><a href="#">React<span class="p"></span></a></li>
+                        <li id="menu-item-8304" class="React Native"><a href="#">React Native<span class="p"></span></a></li>
+                        <li id="menu-item-8296" class="Xamarin Form"><a href="#">Xamarin Form<span class="p"></span></a></li>
+                        <li id="menu-item-9409" class="Java"><a href="#">Java<span class="p"></span></a></li>
+                        <li id="menu-item-8300" class="Flask"><a href="#">Flask<span class="p"></span></a></li>
+                        <li id="menu-item-8299" class="Flutter"><a href="#">Flutter<span class="p"></span></a></li>
+                        <li id="menu-item-8305" class="Books"><a href="#">Books<span class="p"></span></a></li>
+                        <li id="menu-item-9408" class="Java"><a href="#">Java<span class="p"></span></a></li>
+                      </ul>
+                  </div>
+              </div>
+          </div>
+      </div>
+
+    <div class="search-box">
+      <h2>Search Functionality</h2>
+      <input type="text" id="searchInput" placeholder="Search...">
+      <button type="button" onclick="search()">Search</button>
+      <button type="button" onclick="clearPage()">Clear</button> <!-- Button to clear page -->
+
+      <div id="searchResults">
+          <!-- Search results will be displayed here -->
+      </div>
+  </div>
+
+<!--____________________________________MAIN Content -->
+<div id="mask-3" class="clear-block">
+    <div id="mask-2">
+      <div id="mask-1">
+  
+        <!-- primary content -->
+        <div id="primary-content">
+          <div class="blocks clear-block">
+  
+            <div class="posts clear-block">
+  
+              <!-- post -->
+              <div id="post-48430" class="clear-block post-48430 post type-post status-publish format-standard has-post-thumbnail hentry category-action category-indie category-rpg tag-mirror-of-heaven-download tag-mirror-of-heaven-free-download tag-mirror-of-heaven-tenoke-download tag-mirror-of-heaven-tenoke-free-download count-1 odd thumb-left author-admin first">
+  
+                <div class="post-details">
+                  <a class="post-thumb" id="thumb-48430" href="https://drive.google.com/drive/folders/1_veoB0R9FXhQvZfuGdVVytzi0FDhBwh2?usp=drive_link" title="Mirror of Heaven TENOKE Free Download">
+                    <img width="140" height="160" src="https://tutsnode.org/wp-content/uploads/2024/06/Become-a-Cybersecurity-Expert-The-Ultimate-Blackhat-Mastery.jpg" class="attachment-140x140 size-140x140 wp-post-image" alt="Become a Cybersecurity Expert" decoding="async" />
+                  </a>
+  
+                  <h2 class="title">
+                    <a href="https://drive.google.com/drive/folders/1_veoB0R9FXhQvZfuGdVVytzi0FDhBwh2?usp=drive_link" rel="bookmark" title="Permanent Link: Become a Cybersecurity Expert">Become a Cybersecurity Expert: The Ultimate Blackhat Mastery</a>
+                  </h2>
+  
+                  <div class="post-std clear-block">
+                    <div class="post-info">
+                      in <a href="" rel="tag" title="Action (3,462 topics)">Ethical Hacking</a>, <a href="" rel="tag" title="RPG (1,123 topics)">Cybersecurity</a>
+                    </div>
+                  </div>
+  
+                  <div class="post-content clear-block">
+                    Description: Unleash Your Inner Cyber Warrior with Our Blackhat Exclusive Course. Are you ready to dive into the thrilling world of cybersecurity? Unlock secrets …
+                  </div>
+                </div>
+              </div>
+              <!-- /post -->
+  
+              <!-- post -->
+              <div id="post-48425" class="clear-block post-48425 post type-post status-publish format-standard has-post-thumbnail hentry category-action category-adventure tag-portal-2-download tag-portal-2-free-download tag-portal-2-v20240603-download tag-portal-2-v20240603-free-download count-2 even alt thumb-left author-admin">
+                <div class="post-details">
+                  <a class="post-thumb" id="thumb-48425" href="https://drive.google.com/drive/folders/1Ouy6T_oRKnJWuJhgyUiVwr3T_9D0iIlS?usp=drive_link" title="Portal 2 v20240603 Free Download">
+                    <img width="140" height="140" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRwpTvnewivvlVJJwM8CYI7wQMIgbm8oGiySLpXm7CRN_J9zugB" class="attachment-140x140 size-140x140 wp-post-image" alt="Generative AI For Risk & Cyber Security Professionals" decoding="async" />
+                  </a>
+  
+                  <h2 class="title">
+                    <a href="https://drive.google.com/drive/folders/1Ouy6T_oRKnJWuJhgyUiVwr3T_9D0iIlS?usp=drive_link" rel="bookmark" title="Permanent Link: Portal 2 v20240603 Free Download">Generative AI For Risk & Cyber Security Professionals</a>
+                  </h2>
+  
+                  <div class="post-std clear-block">
+                    <div class="post-info">
+                      in <a href="" rel="tag" title="Ethical Hacking">Ethical Hacking</a>, <a href="" rel="tag" title="CyberSecurity topics">CyberSecurity</a>
+                    </div>
+                  </div>
+  
+                  <div class="post-content clear-block">
+                    Description: Welcome to Generative AI For Risks & Cyber Security Professionals Course. In the digital age, the advent of Generative Artificial Intelligence (AI) has not …
+                  </div>
+                </div>
+              </div>
+              <!-- /post -->
+  
+            </div>
+            <!-- /posts -->
+  
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+</body>
+</html>
