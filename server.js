@@ -25,7 +25,8 @@ app.get('/post', async (req, res) => {
 });
 
 // Serve static files (like HTML, CSS, JS) for the frontend
-app.use(express.static('frontend'));
+app.use(express.static(path.join(__dirname, 'frontend')));
+
 
 // Start the server
 app.listen(port, () => {
