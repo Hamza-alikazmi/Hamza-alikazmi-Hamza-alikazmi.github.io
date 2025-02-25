@@ -1,7 +1,7 @@
   // Fetch post data from API
   async function fetchPostData() {
     try {
-        const response = await fetch('http://localhost:3000/post'); // Backend API URL
+        const response = await fetch('https://skillspectum.vercel.app/post'); // Backend API URL
         if (response.ok) {
             const postData = await response.json(); // Get data from the response
 
