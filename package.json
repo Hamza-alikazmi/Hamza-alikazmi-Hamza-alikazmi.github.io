@@ -5,16 +5,14 @@
     "main": "server.js",
     "scripts": {
         "start": "node server.js",
-        "test": "echo \"No tests specified\" && exit 1",
-        "dev": "nodemon server.js"
+        "dev": "nodemon server.js",      // For local development, use nodemon to auto-reload on changes
+        "build": "echo 'No build step needed'" // Optional if no specific build steps are needed
     },
     "dependencies": {
         "express": "^4.17.1",
-        "mongoose": "^5.10.0",
-        "my-awesome-project": "file:"
+        "cors": "^2.8.5" // Add cors to handle cross-origin requests
     },
     "devDependencies": {
-        "jest": "^26.6.3",
         "nodemon": "^2.0.4"
     },
     "keywords": [
