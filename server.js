@@ -1,11 +1,15 @@
 const express = require('express');
 const fs = require('fs').promises; // Use the Promise-based fs API
 const path = require('path');
+const cors = require('cors'); // Add the CORS library
 const app = express();
 const port = 3000;
 
 // Path to the db.json file
 const dbFilePath = path.join(__dirname, 'db.json');
+
+// Enable CORS for all origins
+app.use(cors());
 
 // Endpoint to fetch post data from db.json
 app.get('/post', async (req, res) => {
@@ -26,7 +30,6 @@ app.get('/post', async (req, res) => {
 
 // Serve static files (like HTML, CSS, JS) for the frontend
 app.use(express.static(path.join(__dirname, 'frontend')));
-
 
 // Start the server
 app.listen(port, () => {
