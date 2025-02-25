@@ -9,11 +9,11 @@
         "build": "echo 'No build step needed'"
     },
     "dependencies": {
-        "express": "^5.0.0",  // updated version
-        "cors": "^2.8.5" // latest stable version
+        "express": "^4.17.1",
+        "cors": "^2.8.5" // This should now be listed here
     },
     "devDependencies": {
-        "nodemon": "^3.0.0"  // updated version
+        "nodemon": "^2.0.4"
     },
     "keywords": [
         "awesome",
