@@ -1,42 +1,31 @@
 const express = require('express');
-const fs = require('fs');
+const fs = require('fs').promises; // Use the Promise-based fs API
 const path = require('path');
 const app = express();
 const port = 3000;
 
-// Path to the db.json file (adjust according to your project structure)
-const dbFilePath = path.join(__dirname, 'data', 'db.json');
+// Path to the db.json file
+const dbFilePath = path.join(__dirname, 'db.json');
 
-// Middleware to serve static files (HTML, CSS, JS)
-app.use(express.static('frontend'));
-
-// Utility function to read db.json file
-const readDbFile = async () => {
-    return new Promise((resolve, reject) => {
-        fs.readFile(dbFilePath, 'utf8', (err, data) => {
-            if (err) {
-                return reject(err); // Reject with the error if file read fails
-            }
-            try {
-                const parsedData = JSON.parse(data); // Parse the JSON data
-                resolve(parsedData); // Resolve with the parsed data
-            } catch (parseError) {
-                reject(parseError); // Reject with parse error if JSON parsing fails
-            }
-        });
-    });
-};
-
-// API Route to get the data from db.json
-app.get('/data', async (req, res) => {
+// Endpoint to fetch post data from db.json
+app.get('/post', async (req, res) => {
     try {
-        const posts = await readDbFile(); // Wait for the db.json to be read
-        res.status(200).json(posts); // Send the parsed data as JSON
-    } catch (error) {
-        console.error('Error reading or parsing db.json:', error);
+        // Read the db.json file asynchronously using await
+        const data = await fs.readFile(dbFilePath, 'utf8');
+        
+        // Parse the JSON data
+        const posts = JSON.parse(data);
+
+        // Send the data as a JSON response
+        res.json(posts);
+    } catch (err) {
+        console.error('Error reading or parsing db.json:', err);
         res.status(500).json({ error: 'Failed to read or parse data from db.json' });
     }
 });
+
+// Serve static files (like HTML, CSS, JS) for the frontend
+app.use(express.static('frontend'));
 
 // Start the server
 app.listen(port, () => {
