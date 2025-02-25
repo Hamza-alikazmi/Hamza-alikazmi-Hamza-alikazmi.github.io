@@ -9,7 +9,10 @@ const port = 3000;
 const dbFilePath = path.join(__dirname, 'db.json');
 
 // Enable CORS for all origins
-app.use(cors());
+app.use(cors({
+  origin: 'https://skillspectum.vercel.app'
+}));
+
 
 // Endpoint to fetch post data from db.json
 app.get('/post', async (req, res) => {
