@@ -30,7 +30,17 @@ app.get('/post', (req, res) => {
 });
 
 // Serve static files (like HTML, CSS, JS) for the frontend
-app.use(express.static('frontend'));
+app.use(express.static(path.join(__dirname, 'frontend')));
+
+// Serve index.html for the root route
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'frontend', 'index.html'));
+});
+
+// Catch-all route for other requests
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'frontend', 'index.html'));
+});
 
 // Start the server
 app.listen(port, () => {
