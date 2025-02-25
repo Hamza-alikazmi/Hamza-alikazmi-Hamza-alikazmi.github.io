@@ -1,18 +1,15 @@
 const express = require('express');
 const fs = require('fs');
 const path = require('path');
-const cors = require('cors');  // Import the CORS package
 const app = express();
-const port = process.env.PORT || 3000;
-
-// Enable CORS for all domains (you can be more restrictive with this if needed)
-app.use(cors());
+const port = 3000;
 
 // Path to the db.json file
 const dbFilePath = path.join(__dirname, 'db.json');
 
 // Endpoint to fetch post data from db.json
 app.get('/post', (req, res) => {
+    // Read the db.json file asynchronously
     fs.readFile(dbFilePath, 'utf8', (err, data) => {
         if (err) {
             console.error('Error reading db.json:', err);
@@ -20,7 +17,10 @@ app.get('/post', (req, res) => {
         }
 
         try {
+            // Parse the JSON data
             const posts = JSON.parse(data);
+
+            // Send the data as a JSON response
             res.json(posts);
         } catch (parseError) {
             console.error('Error parsing db.json:', parseError);
@@ -30,17 +30,7 @@ app.get('/post', (req, res) => {
 });
 
 // Serve static files (like HTML, CSS, JS) for the frontend
-app.use(express.static(path.join(__dirname, 'frontend')));
-
-// Serve index.html for the root route
-app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'frontend', 'index.html'));
-});
-
-// Catch-all route for other requests
-app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, 'frontend', 'index.html'));
-});
+app.use(express.static('frontend'));
 
 // Start the server
 app.listen(port, () => {
