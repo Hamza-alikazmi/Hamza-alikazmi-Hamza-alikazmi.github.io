@@ -8,25 +8,20 @@ const port = 3000;
 const dbFilePath = path.join(__dirname, 'db.json');
 
 // Endpoint to fetch post data from db.json
-app.get('/post', (req, res) => {
-    // Read the db.json file asynchronously
-    fs.readFile(dbFilePath, 'utf8', (err, data) => {
-        if (err) {
-            console.error('Error reading db.json:', err);
-            return res.status(500).json({ error: 'Failed to read data from db.json' });
-        }
+app.get('/post', async (req, res) => {
+    try {
+        // Read the db.json file asynchronously
+        const data = await fs.readFile(dbFilePath, 'utf8');
+        
+        // Parse the JSON data
+        const posts = JSON.parse(data);
 
-        try {
-            // Parse the JSON data
-            const posts = JSON.parse(data);
-
-            // Send the data as a JSON response
-            res.json(posts);
-        } catch (parseError) {
-            console.error('Error parsing db.json:', parseError);
-            res.status(500).json({ error: 'Failed to parse data from db.json' });
-        }
-    });
+        // Send the data as a JSON response
+        res.json(posts);
+    } catch (err) {
+        console.error('Error reading or parsing db.json:', err);
+        res.status(500).json({ error: 'Failed to read or parse data from db.json' });
+    }
 });
 
 // Serve static files (like HTML, CSS, JS) for the frontend
