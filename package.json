@@ -5,15 +5,15 @@
     "main": "server.js",
     "scripts": {
         "start": "node server.js",
-        "dev": "nodemon server.js",      // For local development, use nodemon to auto-reload on changes
-        "build": "echo 'No build step needed'" // Optional if no specific build steps are needed
+        "dev": "nodemon server.js",
+        "build": "echo 'No build step needed'"
     },
     "dependencies": {
-        "express": "^4.17.1",
-        "cors": "^2.8.5" // Add cors to handle cross-origin requests
+        "express": "^5.0.0",  // updated version
+        "cors": "^2.8.5" // latest stable version
     },
     "devDependencies": {
-        "nodemon": "^2.0.4"
+        "nodemon": "^3.0.0"  // updated version
     },
     "keywords": [
         "awesome",
