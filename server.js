@@ -4,11 +4,10 @@ const path = require('path');
 const app = express();
 const port = 3000;
 
-// Path to the db.json file
-const dbFilePath = path.join(__dirname, 'db.json');
+module.exports = (req, res) => {
+    // Path to the db.json file within the Vercel deployment (ensure it's in a static directory)
+    const dbFilePath = path.join(__dirname, 'data', 'db.json');
 
-// Endpoint to fetch post data from db.json
-app.get('/post', (req, res) => {
     // Read the db.json file asynchronously
     fs.readFile(dbFilePath, 'utf8', (err, data) => {
         if (err) {
@@ -21,13 +20,13 @@ app.get('/post', (req, res) => {
             const posts = JSON.parse(data);
 
             // Send the data as a JSON response
-            res.json(posts);
+            res.status(200).json(posts);
         } catch (parseError) {
             console.error('Error parsing db.json:', parseError);
             res.status(500).json({ error: 'Failed to parse data from db.json' });
         }
     });
-});
+};
 
 // Serve static files (like HTML, CSS, JS) for the frontend
 app.use(express.static('frontend'));
