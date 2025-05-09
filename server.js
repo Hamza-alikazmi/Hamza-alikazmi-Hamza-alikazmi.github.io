@@ -33,6 +33,10 @@ app.get('/post', async (req, res) => {
 
 // Serve static files (like HTML, CSS, JS) for the frontend
 app.use(express.static(path.join(__dirname, 'frontend')));
+// Route to serve course.html
+app.get('/course', (req, res) => {
+  res.sendFile(path.join(__dirname, 'frontend', 'course.html'));
+});
 
 // Start the server
 app.listen(port, () => {
