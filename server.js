@@ -37,6 +37,9 @@ app.use(express.static(path.join(__dirname, 'frontend')));
 app.get('/course', (req, res) => {
   res.sendFile(path.join(__dirname, 'frontend', 'course.html'));
 });
+app.get('/about', (req, res) => {
+  res.sendFile(path.join(__dirname, 'frontend', 'about.html'));
+});
 
 // Start the server
 app.listen(port, () => {
