@@ -42,6 +42,9 @@ app.get('/course', (req, res) => {
 app.get('/about', (req, res) => {
   res.sendFile(path.join(__dirname, 'frontend', 'about.html'));
 });
+app.get('/uploads', (req, res) => {
+  res.sendFile(path.join(__dirname, 'frontend', 'uploads.html'));
+});
 
 // Start the server
 app.listen(port, () => {
