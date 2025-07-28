@@ -1,175 +1,190 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>About Us</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
     <style>
-        /* Background Gradient */
-        /* body {
-            background: rgb(2, 0, 36);
-            background: linear-gradient(90deg, rgb(8, 7, 107) 0%, rgb(6, 56, 165) 46%, rgba(0, 212, 255, 1) 100%);
-            font-family: 'Arial', sans-serif;
-            color: #333;
+        /* Base Reset */
+        * {
             margin: 0;
             padding: 0;
-        } */
+            box-sizing: border-box;
+        }
 
-        /* Loading Screen Style */
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: #fff;
+            background: linear-gradient(-45deg, #0f0c29, #302b63, #24243e, #000000);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            overflow-x: hidden;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Loading Screen */
         .loading-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(255, 255, 255, 0.8);
+            background-color: rgba(255, 255, 255, 0.9);
             display: flex;
             justify-content: center;
             align-items: center;
             z-index: 9999;
         }
 
-        /* Square Spinner Styles */
         .spinner {
             display: flex;
             justify-content: space-between;
-            width: 70px;
-            height: 70px;
+            width: 80px;
         }
 
         .square {
-            margin: 1px;
-            width: 30px;
+            width: 20px;
             height: 20px;
             background-color: #0057f8;
-            animation: spinSquare 1.5s ease-in-out infinite;
+            margin: 5px;
+            border-radius: 4px;
+            animation: spinSquare 1.2s ease-in-out infinite;
         }
 
-        /* Animations for the squares */
-        .square:nth-child(1) {
-            animation-delay: 0s;
-        }
-        .square:nth-child(2) {
-            animation-delay: 0.3s;
-        }
-        .square:nth-child(3) {
-            animation-delay: 0.6s;
-        }
-        .square:nth-child(4) {
-            animation-delay: 0.9s;
-        }
+        .square:nth-child(2) { animation-delay: 0.2s; }
+        .square:nth-child(3) { animation-delay: 0.4s; }
+        .square:nth-child(4) { animation-delay: 0.6s; }
 
-        /* Spinner animation for squares */
         @keyframes spinSquare {
-            0% {
-                transform: scale(1);
-                opacity: 1;
-            }
-            50% {
-                transform: scale(1.5);
-                opacity: 0.5;
-            }
-            100% {
-                transform: scale(1);
-                opacity: 1;
-            }
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.5); opacity: 0.4; }
         }
 
-        /* Hide Content Initially */
-        .content {
-            display: none;
+        /* Team Section */
+        .diffSection {
+            padding: 60px 20px;
         }
 
-        /* TEAM SECTION */
+        .section-title {
+            text-align: center;
+            font-size: 48px;
+            font-weight: 700;
+            background: linear-gradient(to right, #f314b0, purple);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 40px;
+        }
+
         .totalcard {
-            width: 100%;
             display: flex;
             flex-wrap: wrap;
-            align-items: center;
             justify-content: center;
-            margin-bottom: 0px;
-        }
-
-        .totalcard .card {
-            margin: 50px;
-            width: 300px;
-            border-radius: 10px;
-            background: #fff;
-            box-shadow: inset 0 0 10px rgba(255, 13, 13, 0.4),
-                        0 0 10px rgba(0, 0, 0, 0.3);
-        }
-
-        .card:nth-child(1) {
-            border-top: 5px solid green;
-         }
-            .card:nth-child(2) {
-             border-top: 5px solid blue;
-             }
-                .card:nth-child(3) {
-                 border-top: 5px solid rgba(140, 0, 255, 0.5);
-        }
-
-        .card:nth-child(1):hover {
-            box-shadow: inset 0px 0px 10px rgba(0, 255, 0, 0.5),
-                        1px 1px 30px rgba(0, 255, 0, 0.5);
-        }
-        .card:nth-child(2):hover {
-            box-shadow: inset 0px 0px 10px rgba(0, 0, 255, 0.5),
-                        1px 1px 30px rgb(0, 0, 255);
-        }
-        .card:nth-child(3):hover {
-            box-shadow: inset 0px 0px 10px rgba(140, 0, 255, 0.5),
-                        1px 1px 30px rgba(140, 0, 255, 0.973);
-        }
-
-        .totalcard .card img {
-            width: 100px;
-            height: 100px;
-            margin-top: 5px;
-            cursor: pointer;
-            border-radius: 50px;
-            transition-duration: .8s;
-        }
-
-        .totalcard .card img:hover {
-            transform: scale(3.25);
-            border-radius: 3px;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
-        }
-
-        p {
-            padding: 10px;
+            gap: 30px;
         }
 
         .card {
-            padding: 1%;
-            min-height: 300px;
+            background-color: #fff;
+            color: #333;
+            width: 320px;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            padding: 25px 20px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+        }
+
+        .card:nth-child(1) { border-top: 5px solid green; }
+        .card:nth-child(2) { border-top: 5px solid blue; }
+        .card:nth-child(3) { border-top: 5px solid rgba(140, 0, 255, 0.5); }
+
+        .card img {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 50%;
+            margin-bottom: 15px;
+            transition: transform 0.4s ease, border-radius 0.4s ease;
+        }
+
+        .card img:hover {
+            transform: scale(3);
+            border-radius: 8px;
+            z-index: 10;
+            box-shadow: 0 0 20px rgba(0,0,0,0.6);
         }
 
         .card-title {
-            font-weight: bold;
-            font-family: 'Arial';
+            font-weight: 600;
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        .detail p {
+            font-size: 15px;
+            margin: 10px 0;
+            line-height: 1.5;
         }
 
         .btn {
             background: #28a745;
             color: #fff;
-            padding: 10px 20px;
+            padding: 10px 25px;
             border: none;
-            border-radius: 5px;
+            border-radius: 25px;
             cursor: pointer;
-            transition: background-color 0.3s ease;
-            font-size: 1em;
+            transition: all 0.3s ease;
+            font-weight: bold;
+            text-transform: uppercase;
         }
 
         .btn:hover {
             background-color: #218838;
+            transform: scale(1.05);
+        }
+
+        /* Content Hidden Initially */
+        .content {
+            display: none;
+        }
+
+        /* Fade-In Effect */
+        .fade-in {
+            animation: fadeIn 1.5s ease forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media screen and (max-width: 768px) {
+            .section-title {
+                font-size: 36px;
+            }
+            .card {
+                width: 90%;
+            }
         }
     </style>
 </head>
-<body style="background-color: black;">
+<body>
 
     <!-- Loading Overlay -->
-    <div class="loading-overlay" id="loading" style="display: none;">
+    <div class="loading-overlay" id="loading">
         <div class="spinner">
             <div class="square"></div>
             <div class="square"></div>
@@ -179,69 +194,35 @@
     </div>
 
     <!-- Main Content -->
-    <div class="content" id="main-content" style="display: block;">
-        <div class="diffSection" id="team_section">
-            <center>
-                <p style="font-size: 50px; padding-top: 30px; padding-bottom: 20px; background: linear-gradient(90deg, rgb(243, 20, 176), purple); -webkit-background-clip: text; color: transparent; font-weight: bold;">
-                    MEET OUR TEAM
-                </p>
-            </center>
-            
-        <div class="totalcard">
-            <div class="card">
-                <center><img src="https://your-image-url.com/abdul-mueed.jpg" alt="Abdul Mueed"></center>
-                <center>
-                    <div class="card-title">Abdul Mueed</div>
-                    <div id="detail">
-                        <p>“ Back-end Developer</p>
-                        <p> Hands On Advanced Javascript, PHP MySQL, Laravel“</p>
-                        <a href="mailto:abdul.mueed@example.com">
-                            <button class="btn">Contact</button>
-                        </a>
-                    </div>
-                </center>
-            </div>
-            <div class="card">
-                <center><img src="./Hamza.jpg" alt="Syed Hamza Ali"></center>
-                <center>
-                    <div class="card-title">Syed Hamza Ali</div>
-                    <div class="detail">
-                        <p>“ Front-end Developer </p>
-                        <p>Hands on Bootstrap5,Tailwind CSS, Express, PHP, MYSQL, Jquery, Core Python, and Linux-Based Operating Systems“</p>
-                        <a href="mailto:63kazmi.edu@gmail.com">
-                            <button class="btn">Contact</button>
-                        </a>
-                    </div>
-                </center>
-            </div>
-            <div class="card">
-                <center><img src="images/creator/roshan2.jpeg" alt="Asad Ullah Khan"></center>
-                <center>
-                    <div class="card-title">Asad Ullah Khan</div>
-                    <div class="detail">
-                        <p>“ SEO & Android Studio Expert </p>
-                        <p> Hands On Java for Android App Development“</p>
-                        <a href="mailto:asad.khan@example.com">
-                            <button class="btn">Contact</button>
-                        </a>
-                    </div>
-                </center>
+    <div class="content" id="main-content">
+        <div class="diffSection fade-in" id="team_section">
+            <div class="section-title">MEET OUR TEAM</div>
+
+            <div class="totalcard">
+                <div class="card">
+                    <center><img src="./Hamza.jpg" alt="Syed Hamza Ali"></center>
+                    <center>
+                        <div class="card-title">Syed Hamza Ali</div>
+                        <div class="detail">
+                            <p>Front-end Developer</p>
+                            <p>Skilled in Bootstrap5, Tailwind CSS, Express, PHP, MySQL, jQuery, Core Python, and Linux Customization.</p>
+                            <a href="mailto:63kazmi.edu@gmail.com">
+                                <button class="btn">Contact</button>
+                            </a>
+                        </div>
+                    </center>
+                </div>
             </div>
         </div>
     </div>
 
-    <!-- JavaScript to Hide Loading Screen and Show Content after 10 Seconds -->
+    <!-- JavaScript to Hide Loading Screen -->
     <script>
         window.onload = function() {
-            // Set the background color to black while the loading screen is visible
-            document.getElementsByTagName("body")[0].style.backgroundColor = "black";
-
-            // Set a delay of 10 seconds (10000 milliseconds)
-            setTimeout(function() {
-                // Hide the loading screen and show the main content
+            setTimeout(() => {
                 document.getElementById("loading").style.display = "none";
                 document.getElementById("main-content").style.display = "block";
-            }, 3000);  // 10000 milliseconds = 10 seconds
+            }, 3000);
         };
     </script>
 </body>
